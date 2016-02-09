@@ -1,0 +1,41 @@
+{
+  "name": "fixperm",
+  "version": "0.0.2",
+  "description": "A command-line utility for fixing app permissions",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/jasmine-node/bin/jasmine-node ."
+  },
+  "bin": {
+    "fixperm": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ojengwa/fixperm.git"
+  },
+  "keywords": [
+    "permission",
+    "fix",
+    "su",
+    "sudo",
+    "app",
+    "directory",
+    "file",
+    "linux",
+    "shell",
+    "unix"
+  ],
+  "author": "Bernard Ojengwa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ojengwa/fixperm/issues"
+  },
+  "homepage": "https://github.com/ojengwa/fixperm#readme",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "shelljs": "^0.6.0"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  }
+}
