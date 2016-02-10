@@ -2,7 +2,7 @@
 
 var program = require('commander');
 var pjson = require('./package.json');
-
+var shell = require('shelljs');
 
 program
     .version(pjson.version)
@@ -12,7 +12,7 @@ program
     .option('-u, --user [username]', 'User you want to grant permissions to. Defaults to current logged-in user.')
     .action(function (app) {
         'use strict';
-
+        var appPath = shell.which(app) || false;
         console.log(app);
     })
     .parse(process.argv);

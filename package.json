@@ -1,10 +1,10 @@
 {
   "name": "fixperm",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A command-line utility for fixing app permissions",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/jasmine-node/bin/jasmine-node ."
+    "test": "./node_modules/.bin/istanbul cover . jasmine --captureExceptions && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "bin": {
     "fixperm": "./index.js"
@@ -36,6 +36,8 @@
     "shelljs": "^0.6.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.6",
+    "istanbul": "^0.4.2",
     "jasmine-node": "^1.14.5"
   }
 }
