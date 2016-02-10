@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-var program = require('commander');
+var fixperm = require('commander');
 var pjson = require('./package.json');
 var shell = require('shelljs');
+var chalk = require('chalk');
 
-program
+fixperm
     .version(pjson.version)
     .description('Version: ' + pjson.version + '. ' + pjson.description)
     .usage('[options] app-name')
@@ -13,7 +14,27 @@ program
     .action(function (app) {
         'use strict';
         var appPath = shell.which(app) || false;
-        console.log(app);
+        if (!!appPath) {
+            var command = 'chown -R $(whoami)' + appPath;
+            shell.exec(command, {async: true}, function (code, stdout, stderr) {
+                if (!!stderr) {
+                    chalk.red(
+                        'Status Code: ' +
+                        chalk.underline.red(code) +
+                        '. ' + stderr
+                    );
+                } else {
+                    chalk.green(
+                        'Status Code: ' +
+                        chalk.underline.green(code) +
+                        '. ' + stdout
+                    );
+                }
+
+            });
+        } else {
+            console.log('Cannot find ' + app + '. Are you sure it is installed?');
+        }
     })
     .parse(process.argv);
 
