@@ -1,6 +1,6 @@
 {
   "name": "fixperm",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A command-line utility for fixing app permissions",
   "main": "index.js",
   "scripts": {
