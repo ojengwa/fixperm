@@ -14,8 +14,15 @@ fixperm
     .action(function (app) {
         'use strict';
         var appPath = shell.which(app) || false;
+        var command;
+
         if (!!appPath) {
-            var command = 'chown -R $(whoami)' + appPath;
+            if (!!fixperm.username) {
+                command = 'chown -R ' + fixperm.username + ' ' + appPath;
+            } else {
+                command = 'chown -R $(whoami)' + appPath;
+            }
+
             shell.exec(command, {async: true}, function (code, stdout, stderr) {
                 if (!!stderr) {
                     chalk.red(
@@ -38,3 +45,4 @@ fixperm
     })
     .parse(process.argv);
 
+module.exports = fixperm;
