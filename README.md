@@ -18,9 +18,11 @@ fixperm is a small command-line utility for fixing app permissions. fixperm atte
 
     npm install fixperm -g
 
+
 ## install on windows
 
 `fixperm` is not currently compartible with Windows based systems.
+
 
 ## install from source
 
@@ -32,6 +34,7 @@ fixperm is a small command-line utility for fixing app permissions. fixperm atte
 
     cd fixperm
     npm test
+
 
 ## license
 
