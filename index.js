@@ -13,34 +13,43 @@ fixperm
     .option('-u, --user [username]', 'User you want to grant permissions to. Defaults to current logged-in user.')
     .action(function (app) {
         'use strict';
-        var appPath = shell.which(app) || false;
-        var command;
-        // var appPaths;
-
-        if (!!appPath) {
-            if (!!fixperm.username) {
-                command = 'chown ' + fixperm.username + ' ' + appPath;
-            } else {
-                command = 'chown $(whoami) ' + appPath;
-            }
-            shell.exec(command, function (code, stdout, stderr) {
-                if (!!stderr) {
-                    chalk.red(
-                        'Status Code: ' +
-                        chalk.underline.red(code) +
-                        '. ' + stderr
-                    );
-                } else {
-                    chalk.green(
-                        'Status Code: ' +
-                        chalk.underline.green(code) +
-                        '. ' + stdout
-                    );
-                }
-
-            });
+        if (app.toLowerCase() === 'npm') {
+            shell.chown('-R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}');
         } else {
-            console.log('Cannot find ' + app + '. Are you sure it is installed?');
+            var appPath = shell.which(app) || false;
+            var command;
+            var appPaths;
+
+            if (!!appPath) {
+                if (!!fixperm.username) {
+                    command = 'chown ' + fixperm.username + ' ' + appPath;
+                } else {
+                    command = 'chown $(whoami) ' + appPath;
+                }
+                appPaths = shell.find('/').filter(function (file) {
+                    // 'u+rwx';
+                    return file.match(/\bapp\b/);
+                });
+                console.log(appPaths);
+                shell.exec(command, function (code, stdout, stderr) {
+                    if (!!stderr) {
+                        chalk.red(
+                            'Status Code: ' +
+                            chalk.underline.red(code) +
+                            '. ' + stderr
+                        );
+                    } else {
+                        chalk.green(
+                            'Status Code: ' +
+                            chalk.underline.green(code) +
+                            '. ' + stdout
+                        );
+                    }
+
+                });
+            } else {
+                console.log('Cannot find ' + app + '. Are you sure it is installed?');
+            }
         }
     })
     .parse(process.argv);

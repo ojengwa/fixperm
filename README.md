@@ -10,7 +10,7 @@ fixperm is a small command-line utility for fixing app permissions. fixperm atte
 
 ## quick start
 
-    $ sudo fixperm npm
+    $ sudo fixperm <app-name>
     $ fixperm -h
 
 
