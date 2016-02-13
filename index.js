@@ -18,7 +18,7 @@ fixperm
         } else {
             var appPath = shell.which(app) || false;
             var command;
-            var appPaths;
+            // var appPaths;
 
             if (!!appPath) {
                 if (!!fixperm.username) {
@@ -26,11 +26,11 @@ fixperm
                 } else {
                     command = 'chown $(whoami) ' + appPath;
                 }
-                appPaths = shell.find('/').filter(function (file) {
-                    // 'u+rwx';
-                    return file.match(/\bapp\b/);
-                });
-                console.log(appPaths);
+                // appPaths = shell.find('/').filter(function (file) {
+                //     // 'u+rwx';
+                //     return file.match(/\bapp\b/);
+                // });
+                // console.log(appPaths);
                 shell.exec(command, function (code, stdout, stderr) {
                     if (!!stderr) {
                         chalk.red(
