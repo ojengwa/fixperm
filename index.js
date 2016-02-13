@@ -15,15 +15,15 @@ fixperm
         'use strict';
         var appPath = shell.which(app) || false;
         var command;
+        // var appPaths;
 
         if (!!appPath) {
             if (!!fixperm.username) {
-                command = 'chown -R ' + fixperm.username + ' ' + appPath;
+                command = 'chown ' + fixperm.username + ' ' + appPath;
             } else {
-                command = 'chown -R $(whoami)' + appPath;
+                command = 'chown $(whoami) ' + appPath;
             }
-
-            shell.exec(command, {async: true}, function (code, stdout, stderr) {
+            shell.exec(command, function (code, stdout, stderr) {
                 if (!!stderr) {
                     chalk.red(
                         'Status Code: ' +
